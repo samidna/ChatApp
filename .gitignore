@@ -1,5 +1,5 @@
-appsettings.json
-appsettings.Development.json
-
-bin/
-obj/
+ChatApp.API/appsettings.json
+ChatApp.API/appsettings.Development.json
+ChatApp.API/bin/
+ChatApp.API/obj/
+.vs/
