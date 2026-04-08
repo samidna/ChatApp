@@ -1,16 +1,44 @@
 using ChatApp.Core.Entities;
+using ChatApp.Core.Interfaces;
 using ChatApp.Infrastructure.Data;
+using ChatApp.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    const string schemeId = "Bearer";
+
+    c.AddSecurityDefinition(schemeId, new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = "Bearer {token}",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+{
+    {
+        new OpenApiSecuritySchemeReference(schemeId, document),
+        []
+    }
+});
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
 {
@@ -21,6 +49,32 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSettings")["SecretKey"]!)),
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
 
 var app = builder.Build();
 

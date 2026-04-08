@@ -32,3 +32,4 @@ C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\refint\ChatApp.Infra
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.pdb
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.genruntimeconfig.cache
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ref\ChatApp.Infrastructure.dll
+C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.sourcelink.json

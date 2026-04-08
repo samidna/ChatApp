@@ -229,6 +229,10 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.17.0, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.1, )"
@@ -236,6 +240,10 @@
             "StackExchange.Redis": {
               "target": "Package",
               "version": "[2.12.14, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.17.0, )"
             }
           },
           "imports": [
