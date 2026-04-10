@@ -260,6 +260,7 @@ C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.AssemblyInfo.cs
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.csproj.CoreCompileInputs.cache
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.sourcelink.json
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
@@ -268,11 +269,12 @@ C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.build.json
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.development.json
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp..54C60CEB.Up2Date
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.dll
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\refint\ChatApp.API.dll
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.pdb
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.genruntimeconfig.cache
 C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ref\ChatApp.API.dll
-C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
-C:\Projects\ChatApp\ChatApp.API\obj\Debug\net9.0\ChatApp.API.sourcelink.json
+C:\Projects\ChatApp\ChatApp.API\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Projects\ChatApp\ChatApp.API\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll

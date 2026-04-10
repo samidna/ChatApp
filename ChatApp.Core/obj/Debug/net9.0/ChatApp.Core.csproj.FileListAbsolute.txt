@@ -18,8 +18,8 @@ C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.GeneratedMSBuildE
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.AssemblyInfoInputs.cache
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.AssemblyInfo.cs
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.csproj.CoreCompileInputs.cache
+C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.sourcelink.json
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.dll
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\refint\ChatApp.Core.dll
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.pdb
 C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ref\ChatApp.Core.dll
-C:\Projects\ChatApp\ChatApp.Core\obj\Debug\net9.0\ChatApp.Core.sourcelink.json

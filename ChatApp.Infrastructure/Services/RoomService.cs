@@ -15,8 +15,18 @@ namespace ChatApp.Infrastructure.Services
             _context = context;
         }
 
-        public async Task AddMemberAsync(Guid roomId, Guid userId)
+        public async Task AddMemberAsync(Guid roomId, Guid userId,Guid creatorId)
         {
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
+            if (room is null)
+                throw new Exception("Room not found");
+
+            var isCreatorAdmin = await _context.RoomMembers
+                .AnyAsync(rm => rm.RoomId == roomId && rm.UserId == creatorId && rm.IsAdmin);
+
+            if (!isCreatorAdmin)
+                throw new Exception("Only admin can add member");
+
             var exists = await _context.RoomMembers
             .AnyAsync(rm => rm.RoomId == roomId && rm.UserId == userId);
 

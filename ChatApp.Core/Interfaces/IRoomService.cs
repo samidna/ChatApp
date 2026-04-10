@@ -7,7 +7,7 @@ namespace ChatApp.Core.Interfaces
         Task<RoomResponseDto> CreateRoomAsync(CreateRoomDto dto, Guid creatorId);
         Task<List<RoomResponseDto>> GetUserRoomsAsync(Guid userId);
         Task<RoomResponseDto> GetRoomByIdAsync(Guid roomId);
-        Task AddMemberAsync(Guid roomId, Guid userId);
+        Task AddMemberAsync(Guid roomId, Guid userId,Guid creatorId);
         Task RemoveMemberAsync(Guid roomId, Guid userId);
         Task DeleteRoomAsync(Guid roomId, Guid requesterId);
     }

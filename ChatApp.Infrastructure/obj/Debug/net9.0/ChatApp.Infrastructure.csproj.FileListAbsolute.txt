@@ -26,10 +26,10 @@ C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructu
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.AssemblyInfoInputs.cache
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.AssemblyInfo.cs
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.sourcelink.json
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp..20B20D2C.Up2Date
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.dll
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\refint\ChatApp.Infrastructure.dll
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.pdb
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.genruntimeconfig.cache
 C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ref\ChatApp.Infrastructure.dll
-C:\Projects\ChatApp\ChatApp.Infrastructure\obj\Debug\net9.0\ChatApp.Infrastructure.sourcelink.json

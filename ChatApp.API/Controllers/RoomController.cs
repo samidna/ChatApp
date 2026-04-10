@@ -68,7 +68,7 @@ namespace ChatApp.API.Controllers
         {
             try
             {
-                await _roomService.AddMemberAsync(roomId, userId);
+                await _roomService.AddMemberAsync(roomId, userId,GetUserId());
                 return Ok("Member added.");
             }
             catch (Exception ex)
