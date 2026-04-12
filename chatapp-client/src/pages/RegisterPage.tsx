@@ -34,7 +34,7 @@ export default function RegisterPage() {
           <input
             style={styles.input}
             type="text"
-            placeholder="İstifadəçi adı"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required

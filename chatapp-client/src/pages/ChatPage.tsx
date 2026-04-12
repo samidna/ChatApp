@@ -4,6 +4,8 @@ import { useSignalR } from '../hooks/useSignalR';
 import { getRooms, createRoom } from '../api/rooms';
 import { getMessages } from '../api/messages';
 import { Room, Message } from '../types';
+import { searchUsers, addMember } from '../api/users';
+import { UserResponseDto } from '../types';
 
 export default function ChatPage() {
   const { user, logout } = useAuth();
@@ -14,6 +16,9 @@ export default function ChatPage() {
   const [newRoomName, setNewRoomName] = useState('');
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showAddMember, setShowAddMember] = useState(false);
+  const [searchUsername, setSearchUsername] = useState('');
+  const [searchResults, setSearchResults] = useState<UserResponseDto[]>([]);
 
   useEffect(() => {
     loadRooms();
@@ -28,7 +33,7 @@ export default function ChatPage() {
       const data = await getRooms();
       setRooms(data);
     } catch (err) {
-      console.error('Otaqlar yüklənmədi:', err);
+      console.error('Rooms not loaded:', err);
     }
   };
 
@@ -62,7 +67,29 @@ export default function ChatPage() {
       setRooms((prev) => [...prev, room]);
       setNewRoomName('');
     } catch (err) {
-      console.error('Otaq yaradılmadı:', err);
+      console.error('No room created:', err);
+    }
+  };
+
+  const handleSearchUser = async () => {
+    if (!searchUsername.trim()) return;
+    try {
+      const results = await searchUsers(searchUsername);
+      setSearchResults(results);
+    } catch (err) {
+      console.error('Searching error:', err);
+    }
+  };
+
+  const handleAddMember = async (userId: string) => {
+    if (!selectedRoom) return;
+    try {
+      await addMember(selectedRoom.id, userId);
+      setShowAddMember(false);
+      setSearchResults([]);
+      setSearchUsername('');
+    } catch (err) {
+      console.error('Member not added:', err);
     }
   };
 
@@ -72,13 +99,13 @@ export default function ChatPage() {
       <div style={styles.sidebar}>
         <div style={styles.sidebarHeader}>
           <span style={styles.username}>👤 {user?.username}</span>
-          <button style={styles.logoutBtn} onClick={logout}>Çıx</button>
+          <button style={styles.logoutBtn} onClick={logout}>Logout</button>
         </div>
 
         <div style={styles.createRoom}>
           <input
             style={styles.roomInput}
-            placeholder="Otaq adı..."
+            placeholder="Room name..."
             value={newRoomName}
             onChange={(e) => setNewRoomName(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleCreateRoom()}
@@ -109,6 +136,15 @@ export default function ChatPage() {
           <>
             <div style={styles.chatHeader}>
               <h3 style={{ margin: 0 }}># {selectedRoom.name}</h3>
+              <div style={styles.chatHeader}>
+                <h3 style={{ margin: 0 }}># {selectedRoom.name}</h3>
+                <button
+                  style={styles.addMemberBtn}
+                  onClick={() => setShowAddMember(!showAddMember)}
+                >
+                  👤 Add member
+                </button>
+              </div>
             </div>
 
             <div style={styles.messages}>
@@ -136,10 +172,36 @@ export default function ChatPage() {
               <div ref={messagesEndRef} />
             </div>
 
+            {showAddMember && (
+              <div style={styles.addMemberPanel}>
+                <input
+                  style={styles.searchInput}
+                  placeholder="Search user name..."
+                  value={searchUsername}
+                  onChange={(e) => setSearchUsername(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearchUser()}
+                />
+                <button style={styles.searchBtn} onClick={handleSearchUser}>Search</button>
+                <div style={styles.searchResults}>
+                  {searchResults.map((user) => (
+                    <div key={user.id} style={styles.searchResultItem}>
+                      <span>{user.username}</span>
+                      <button
+                        style={styles.addBtn}
+                        onClick={() => handleAddMember(user.id)}
+                      >
+                        Add
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div style={styles.inputArea}>
               <input
                 style={styles.messageInput}
-                placeholder="Mesaj yaz..."
+                placeholder="Write message..."
                 value={newMessage}
                 onChange={(e) => {
                   setNewMessage(e.target.value);
@@ -148,13 +210,13 @@ export default function ChatPage() {
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               />
               <button style={styles.sendBtn} onClick={handleSendMessage}>
-                Göndər
+                Send
               </button>
             </div>
           </>
         ) : (
           <div style={styles.noRoom}>
-            <p>Otaq seçin və ya yeni otaq yaradın</p>
+            <p>Choose room or create room</p>
           </div>
         )}
       </div>
@@ -174,7 +236,66 @@ const styles: Record<string, React.CSSProperties> = {
   roomList: { flex: 1, overflowY: 'auto' },
   roomItem: { padding: '0.75rem 1rem', cursor: 'pointer', borderRadius: '6px', margin: '0.2rem 0.5rem', transition: 'background 0.2s' },
   chatArea: { flex: 1, display: 'flex', flexDirection: 'column' },
-  chatHeader: { padding: '1rem', borderBottom: '1px solid #eee', backgroundColor: 'white' },
+  chatHeader: {
+    padding: '1rem',
+    borderBottom: '1px solid #eee',
+    backgroundColor: 'white',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  addMemberBtn: {
+    padding: '0.5rem 1rem',
+    backgroundColor: '#4f46e5',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer'
+  },
+  addMemberPanel: {
+    padding: '1rem',
+    borderTop: '1px solid #eee',
+    backgroundColor: '#f9f9f9',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '0.5rem'
+  },
+  searchInput: {
+    padding: '0.5rem',
+    borderRadius: '6px',
+    border: '1px solid #ddd',
+    fontSize: '0.9rem'
+  },
+  searchBtn: {
+    padding: '0.5rem',
+    backgroundColor: '#4f46e5',
+    color: 'white',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer'
+  },
+  searchResults: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '0.5rem'
+  },
+  searchResultItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0.5rem',
+    backgroundColor: 'white',
+    borderRadius: '6px',
+    border: '1px solid #eee'
+  },
+  addBtn: {
+    padding: '0.3rem 0.75rem',
+    backgroundColor: '#10b981',
+    color: 'white',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer'
+  },
   messages: { flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' },
   message: { display: 'flex', flexDirection: 'column', maxWidth: '60%' },
   sender: { fontSize: '0.75rem', color: '#888', marginBottom: '0.2rem' },

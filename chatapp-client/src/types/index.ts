@@ -55,3 +55,10 @@ export interface SendMessageDto {
   content: string;
   fileUrl?: string;
 }
+
+export interface UserResponseDto {
+  id: string;
+  username: string;
+  email: string;
+  isOnline: boolean;
+}

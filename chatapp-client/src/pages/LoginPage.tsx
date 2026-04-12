@@ -18,7 +18,7 @@ export default function LoginPage() {
       await login({ email, password });
       navigate('/');
     } catch {
-      setError('Email və ya şifrə yanlışdır.');
+      setError('Email or password is not correct.');
     } finally {
       setLoading(false);
     }
@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h2 style={styles.title}>Daxil ol</h2>
+        <h2 style={styles.title}>Sign in</h2>
         {error && <p style={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
@@ -41,17 +41,17 @@ export default function LoginPage() {
           <input
             style={styles.input}
             type="password"
-            placeholder="Şifrə"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button style={styles.button} type="submit" disabled={loading}>
-            {loading ? 'Gözləyin...' : 'Daxil ol'}
+            {loading ? 'Wait...' : 'Sign in'}
           </button>
         </form>
         <p style={styles.link}>
-          Hesabın yoxdur? <Link to="/register">Qeydiyyat</Link>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>

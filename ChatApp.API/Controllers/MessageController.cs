@@ -17,7 +17,7 @@ namespace ChatApp.API.Controllers
             _messageService = messageService;
         }
 
-        private Guid GetUserId() => Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        private Guid GetUserId() => Guid.Parse(User.Claims.First(c => c.Type == "uid").Value);
 
         [HttpPost]
         public async Task<IActionResult> SendMessage(SendMessageDto dto)
